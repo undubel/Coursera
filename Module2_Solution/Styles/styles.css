@@ -87,7 +87,7 @@
  }
  /*********************************************************Small Devices responsive styles******************************************************************/
  
- @media (min-width: 320px) and (max-width:767px) {
+ @media (min-width:320px) and (max-width:767px) {
      #chContent,
      #beContent,
      #suContent {

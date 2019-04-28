@@ -1,0 +1,144 @@
+ /*General styles*/
+ 
+ * {
+     box-sizing: border-box;
+     margin: 0;
+     padding: 0;
+ }
+ /*Setting the body styles*/
+ 
+ body {
+     background-image: url("../Images/food.png");
+     /* taken from https://dribbble.com/shots/3351201-Food-Bev-Pattern*/
+     background-color: black;
+     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+ }
+ /*Settin the padding in the main container*/
+ 
+ #main {
+     padding-bottom: 20px;
+ }
+ /***********************************************************Header container styles****************************************************************************/
+ 
+ #header {
+     height: 60px;
+     background-image: url("../Images/banner.jpg");
+     background-repeat: no-repeat;
+     background-size: cover;
+     text-align: left;
+     padding-top: 10px;
+     border-bottom: 1px solid black;
+ }
+ /************************************************************"Titles" container styles*********************************************************************************/
+ 
+ #ch,
+ #be,
+ #su {
+     width: 100px;
+     float: right;
+     text-align: center;
+ }
+ 
+ #ch {
+     background-color: #C28B4F;
+     color: whitesmoke;
+     border-left: .5px black solid;
+     border-bottom: .5px black solid;
+ }
+ 
+ #be {
+     background-color: #FEE370;
+     color: black;
+     border-left: .5px black solid;
+     border-bottom: .5px black solid;
+ }
+ 
+ #su {
+     background-color: #485F2F;
+     color: whitesmoke;
+     border-left: .5px black solid;
+     border-bottom: .5px black solid;
+ }
+ /*********************************************************Dummy Content styles******************************************************************/
+ 
+ #chContent,
+ #beContent,
+ #suContent {
+     background-color: lightgray;
+     padding: 0 0 10px 10px;
+ }
+ 
+ #chContent {
+     border: 2px #C28B4F solid;
+ }
+ 
+ #beContent {
+     border: 2px #FEE370 solid;
+ }
+ 
+ #suContent {
+     border: 2px #485F2F solid;
+ }
+ 
+ p {
+     clear: both;
+     text-align: justify;
+     margin-right: 10px;
+ }
+ /*********************************************************Small Devices responsive styles******************************************************************/
+ 
+ @media (min-width: 320px) and (max-width:767px) {
+     #chContent,
+     #beContent,
+     #suContent {
+         width: 80%;
+         margin: 20px 10% 20px 10%;
+     }
+     #header {
+         padding-left: 10%
+     }
+ }
+ /*****************************************************************Tablets and medium devices styles*******************************************************/
+ 
+ @media(min-width:768px) and (max-width:991px) {
+     #header {
+         padding-left: 3.33%
+     }
+     #chContent,
+     #beContent {
+         width: 45%;
+         float: left;
+         margin: 20px 0 20px 0;
+     }
+     #chContent {
+         margin-left: 3.33%;
+         margin-right: 3.33%;
+     }
+     #beContent {
+         margin-right: 3.33%;
+     }
+     #suContent {
+         width: auto;
+         margin: 20px 3.33% 20px 3.33%;
+         clear: both;
+     }
+ }
+ /***********************************************************************Large Devices styles************************************************/
+ 
+ @media(min-width:992px) {
+     #header {
+         padding-left: 2.5%;
+     }
+     #chContent,
+     #beContent,
+     #suContent {
+         width: 30%;
+         float: left;
+         margin: 20px 0 20px 0;
+     }
+     #chContent,
+     #suContent {
+         margin-left: 2.5%;
+         margin-right: 2.5%;
+     }
+ }

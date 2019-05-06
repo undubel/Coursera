@@ -1,0 +1,54 @@
+body {
+  background-image: url("../Images/food.png");
+  /* taken from https://dribbble.com/shots/3351201-Food-Bev-Pattern*/
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-size: 14px;
+  color: black;
+}
+
+#header-nav{
+ border-radius: 0;
+ border:0;
+ background-image: url("../Images/banner.jpg");
+ background-repeat: no-repeat;
+ background-size: cover;
+ 
+}
+
+#navbar-brand{
+ font-family: 'Oxygen', sans-serif;
+ color:black;
+ font-weight: bold;
+ text-shadow: 1px 1px 1px #222;
+ margin-top: 0;
+ margin-bottom: 0;
+ padding-left: 0;
+ padding-right: 10px;
+ text-decoration: none;
+ 
+}
+
+#chContent,
+#beContent,
+#suContent {
+ background-color: lightgray;
+ padding: 0 0 10px 10px;
+ border-left: 10px solid white;
+ margin-top: 10px;
+}
+#suContent {
+border-right: 10px solid white;
+  
+}
+
+#nav-list :hover{
+  color:Blacks;
+  background-color: bisque;
+}
+
+#chContent p,
+#beContent p,
+#suContent p{
+ text-align: justify;
+ margin-right: 10px;
+}

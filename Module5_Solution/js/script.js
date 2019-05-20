@@ -16,7 +16,7 @@ var dc = {};
 var homeHtmlUrl = "snippets/home-snippet.html";
 var allCategoriesUrl =
   "https://davids-restaurant.herokuapp.com/categories.json";
-var homeHtmlUrl = "snippets/categories-title-snippet.html";
+var categoriesTitleHtml = "snippets/categories-title-snippet.html";
 var categoryHtml = "snippets/category-snippet.html";
 var menuItemsUrl =
   "https://davids-restaurant.herokuapp.com/menu_items.json?category=";
@@ -83,17 +83,11 @@ document.addEventListener("DOMContentLoaded", function (event) {
 showLoading("#main-content");
 $ajaxUtils.sendGetRequest(
   allCategoriesUrl,
-  function (responseText){
-    document.querySelector("#main-Content").innerHTML = responseText;
-    
-  }, // ***** <---- TODO: STEP 1: Substitute [...] ******
+  buildAndShowHomeHTML, // ***** <---- TODO: STEP 1: Substitute [...] ******
   true); // Explicitely setting the flag to get JSON from server processed into an object literal
 });
 // *** finish **
-dc.chooseRandomCategory = function(){
-  showLoading("#main-content");
-  $ajaxUtils.sendGetRequest(allCategoriesUrl,buildAndShowHomeHTML);
-}
+
 
 // Builds HTML for the home page based on categories array
 // returned from the server.
@@ -102,24 +96,14 @@ function buildAndShowHomeHTML (categories) {
   // Load home snippet page
   $ajaxUtils.sendGetRequest(
     homeHtmlUrl,
-    function (homeHtmlUrl) {
-      $ajaxUtils.sendGetRequest(
-      categoryHtml,
-      function(categoryHtml){
-        var chosenCategoryShortName =
-        chooseRandomCategory(categories,
-                             homeHtmlUrl,
-                             categoryHtml);
-          insertHtml("#main-content",chosenCategoryShortName);
-        
-      },
-      false);
+    function (homeHtml) {
 
       // TODO: STEP 2: Here, call chooseRandomCategory, passing it retrieved 'categories'
       // Pay attention to what type of data that function returns vs what the chosenCategoryShortName
       // variable's name implies it expects.
       // var chosenCategoryShortName = ....
 
+      var chosenCategoryShortName = "'" + chooseRandomCategory(categories).short_name + "'";
 
       // TODO: STEP 3: Substitute {{randomCategoryShortName}} in the home html snippet with the
       // chosen category from STEP 2. Use existing insertProperty function for that purpose.
@@ -134,11 +118,17 @@ function buildAndShowHomeHTML (categories) {
       //
       // var homeHtmlToInsertIntoMainPage = ....
 
+      var homeHtmlToInsertIntoMainPage = insertProperty(homeHtml,
+                                                        "randomCategoryShortName",
+                                                        chosenCategoryShortName)
+
 
       // TODO: STEP 4: Insert the the produced HTML in STEP 3 into the main page
       // Use the existing insertHtml function for that purpose. Look through this code for an example
       // of how to do that.
       // ....
+
+      insertHtml("#main-content", homeHtmlToInsertIntoMainPage);
 
     },
     false); // False here because we are getting just regular HTML from the server, so no need to process JSON.
@@ -160,7 +150,7 @@ dc.loadMenuCategories = function () {
   showLoading("#main-content");
   $ajaxUtils.sendGetRequest(
     allCategoriesUrl,
-    buildAndShowHomeHTML);
+    buildAndShowCategoriesHTML);
 };
 
 
@@ -176,11 +166,11 @@ dc.loadMenuItems = function (categoryShort) {
 
 // Builds HTML for the categories page based on the data
 // from the server
-function buildAndShowHomeHTML (categories) {
+function buildAndShowCategoriesHTML (categories) {
   // Load title snippet of categories page
   $ajaxUtils.sendGetRequest(
-    homeHtmlUrl,
-    function (homeHtmlUrl) {
+    categoriesTitleHtml,
+    function (categoriesTitleHtml) {
       // Retrieve single category snippet
       $ajaxUtils.sendGetRequest(
         categoryHtml,
@@ -190,7 +180,7 @@ function buildAndShowHomeHTML (categories) {
 
           var categoriesViewHtml =
             buildCategoriesViewHtml(categories,
-              homeHtmlUrl,
+                                    categoriesTitleHtml,
                                     categoryHtml);
           insertHtml("#main-content", categoriesViewHtml);
         },
@@ -203,10 +193,10 @@ function buildAndShowHomeHTML (categories) {
 // Using categories data and snippets html
 // build categories view HTML to be inserted into page
 function buildCategoriesViewHtml(categories,
-                                 homeHtmlUrl,
+                                 categoriesTitleHtml,
                                  categoryHtml) {
 
-  var finalHtml = homeHtmlUrl;
+  var finalHtml = categoriesTitleHtml;
   finalHtml += "<section class='row'>";
 
   // Loop over categories
